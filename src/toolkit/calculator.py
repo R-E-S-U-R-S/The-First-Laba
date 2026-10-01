@@ -1,38 +1,49 @@
 from errors import calc_error_unknown_input_simbol
 
-# функция для разделения и преобразования начальной строки
-def str_sep(inptstr: str):
-    while inptstr.count(" ")>0:
-        inptstr=inptstr.replace(" ", "")
+# tokenizer
+def str_sep(inpt_str: str) -> tuple[list, list]:
+    while inpt_str.count(" ")>0:
+        inpt_str=inpt_str.replace(" ", "")
     numb = ""
     numbs=[]
     operations=[]
     l=0
-    if inptstr[0] == "-":
-        numb+=inptstr[0]
-        inptstr=inptstr[1:]
-    elif inptstr[0] == "+":
-        inptstr=inptstr[1:]
 
-    while l != len(inptstr):
-        if inptstr[l] in "0123456789":
-            numb+=inptstr[l]
+    if ")" in inpt_str:
+        inpt_str=brackets_calculation(inpt_str)
+
+    if inpt_str[0] == "-":
+        numb+=inpt_str[0]
+        inpt_str= inpt_str[1:]
+    elif inpt_str[0] == "+":
+        inpt_str= inpt_str[1:]
+
+    while l != len(inpt_str):
+        if inpt_str[l] in "0123456789,.":
+            numb+=inpt_str[l]
             l+=1
-        elif inptstr[l] in "()":
-            operations.append(inptstr[l])
-            l+=1
-        elif inptstr[l] in "+-*/":
-            numbs.append(int(numb))
+        elif inpt_str[l] in "+-*/":
+            numbs.append(float(numb))
             numb = ""
-            operations.append(inptstr[l])
+            operations.append(inpt_str[l])
             l+=1
         else:
             calc_error_unknown_input_simbol()
             break
-    numbs.append(int(numb))
+    numbs.append(float(numb))
     return numbs,operations
 
-# провожу вычисления для каждой функции
+# calculating brackets
+def brackets_calculation(inpt_str:str) -> str:
+    back_index=inpt_str.index(")")
+    front_index=back_index-1
+    while inpt_str[front_index]!= "(":
+        front_index-=1
+
+
+    return inpt_str[:front_index] + str(calc(inpt_str[front_index+1:back_index])) + inpt_str[back_index+1::]
+
+# calculating each operation
 def opcalculate(numbs: list, operations: list, operation: str) -> tuple[list, list]:
     while operations.count(operation)!=0:
         multiply_index = operations.index(operation)
@@ -48,12 +59,15 @@ def opcalculate(numbs: list, operations: list, operation: str) -> tuple[list, li
         operations.pop(multiply_index)
     return numbs, operations
 
-# вызываю функции для вычисления
-def calc(inptstr: str) :
+# main calculating func
+def calc(inptstr: str) -> float :
     numbs,operations = str_sep(inptstr)
     for operation in "*/+-":
         if operation.count(operation)!=0:
             opcalculate(numbs, operations, operation)
-    return numbs[0]
+    if numbs[0]==int(numbs[0]):
+        return int(numbs[0])
+    else:
+        return numbs[0]
 
 print(calc(input("Input str: ")))
