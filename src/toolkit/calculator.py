@@ -1,4 +1,4 @@
-from errors import calc_error_unknown_input_simbol
+from src.toolkit.errors import calc_error_unknown_input_simbol
 
 # tokenizer
 def str_sep(inpt_str: str) -> tuple[list, list]:
@@ -28,8 +28,7 @@ def str_sep(inpt_str: str) -> tuple[list, list]:
             operations.append(inpt_str[l])
             l+=1
         else:
-            calc_error_unknown_input_simbol()
-            break
+            return None
     numbs.append(float(numb))
     return numbs,operations
 
@@ -61,7 +60,10 @@ def opcalculate(numbs: list, operations: list, operation: str) -> tuple[list, li
 
 # main calculating func
 def calc(inptstr: str) -> float :
-    numbs,operations = str_sep(inptstr)
+    try:
+        numbs,operations = str_sep(inptstr)
+    except:
+        return calc_error_unknown_input_simbol()
     for operation in "*/+-":
         if operation.count(operation)!=0:
             opcalculate(numbs, operations, operation)
@@ -69,5 +71,3 @@ def calc(inptstr: str) -> float :
         return int(numbs[0])
     else:
         return numbs[0]
-
-print(calc(input("Input str: ")))
