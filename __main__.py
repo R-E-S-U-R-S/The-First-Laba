@@ -6,7 +6,6 @@ from src.toolkit.converter import length_converter, mass_converter, temp_convert
 
 app = typer.Typer()
 
-@app.command()
 def convert(convert_units_type:str):
     """Allows to convert length, temperature and mass units. Type mass/length/temperature to use mass or length converter. Requires additional input in next command in 'number, input units, output units' format. Please divide arguments using only space."""
 
@@ -16,6 +15,10 @@ def convert(convert_units_type:str):
         sys.exit(2)
 
     inpt_str = input("Input number, input unit, output unit: ").split(" ")
+    if len(inpt_str)!=3:
+        error_msg = typer.style("Wrong input quantity", fg=typer.colors.RED,bold=True)
+        typer.echo(error_msg, err=True)
+        sys.exit(2)
     try:
         float(inpt_str[0])
     except:
@@ -52,9 +55,7 @@ def convert(convert_units_type:str):
             typer.echo(str(e), err=True)
             sys.exit(2)
 
-@app.command()
 def calculation(input_str:str, digit_round: int = 5):
-    # todo -- перед отриц числами, если многа пробелов, то в кавычках
     """Runs simple calculation engine. Please type calculation sequence in brackets. If - is first symbol, please put -- before sequence. Rounding function available with '--digit_round=...' command."""
     try:
         print(f"Calculation answer: {calc(input_str, digit_round)}")
@@ -63,4 +64,4 @@ def calculation(input_str:str, digit_round: int = 5):
         sys.exit(2)
 
 if __name__ == "__main__":
-    app()
+    print(convert("temperature"))

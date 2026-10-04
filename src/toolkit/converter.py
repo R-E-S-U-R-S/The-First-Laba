@@ -20,7 +20,6 @@ def mass_converter(inpt_mass:float, inpt_units:str, output_units:str):
     return inpt_mass/mass_constants[output_units]
 
 def temp_converter(inpt_temp:float, inpt_units:str, output_units:str):
-
     if inpt_temp <= min_temperature_constants[inpt_units]:
         raise ConvErrors("Impossible low temperature")
 
