@@ -1,18 +1,8 @@
+from logging import exception
+
 from src.toolkit.errors import  ConvErrors
+from src.toolkit.constants import  length_cnostants, mass_constants, min_temperature_constants
 
-length_cnostants={
-    "meters": 1,
-    "kilometers": 1000,
-    "millimeters": 0.001,
-    "centimetres": 0.01
-}
-
-mass_constants={
-    "kilogram": 1000,
-    "gram": 1,
-    "milligram": 0.01,
-    "ton": 1000000
-}
 
 def length_converter(inpt_length:float, inpt_units:str, output_units:str):
     if inpt_units not in length_cnostants or output_units not in length_cnostants:
@@ -30,15 +20,9 @@ def mass_converter(inpt_mass:float, inpt_units:str, output_units:str):
     return inpt_mass/mass_constants[output_units]
 
 def temp_converter(inpt_temp:float, inpt_units:str, output_units:str):
-    if inpt_units.lower() == "celsius":
-        if float(inpt_temp) <= -273.15:
-            raise ConvErrors("Impossible low temperature")
-    elif inpt_units.lower() == "fahrenheit":
-        if float(inpt_temp) <= -459.67:
-            raise ConvErrors("Impossible low temperature")
-    elif inpt_units.lower() == "kelvin":
-        if float(inpt_temp) <= 0:
-            raise ConvErrors("Impossible low temperature")
+    if inpt_temp <= min_temperature_constants[inpt_units]:
+        raise ConvErrors("Impossible low temperature")
+
 
     if inpt_units.lower()=="celsius" and output_units.lower()=="fahrenheit":
         return inpt_temp*1.8+32
@@ -54,5 +38,3 @@ def temp_converter(inpt_temp:float, inpt_units:str, output_units:str):
         return inpt_temp - 273.15
     elif inpt_units==output_units:
         return inpt_temp
-    else:
-        raise ConvErrors("Unknown conversion unit")

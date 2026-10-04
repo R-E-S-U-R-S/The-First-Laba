@@ -45,11 +45,11 @@ def convert(convert_units_type:str):
             sys.exit(2)
 
 @app.command()
-def calculation(input_str:str):
+def calculation(input_str:str, digit_round: int = 5):
     # todo -- перед отриц числами, если многа пробелов, то в кавычках
-    """Runs simple calculation engine. Please type calculation sequence in brackets. If - is first letter, please put -- before sequence"""
+    """Runs simple calculation engine. Please type calculation sequence in brackets. If - is first symbol, please put -- before sequence. Rounding function available with '--digit_round=...' command."""
     try:
-        print(f"Calculation answer: {calc(input_str)}")
+        print(f"Calculation answer: {calc(input_str, digit_round)}")
     except Exception as e:
         typer.echo(str(e))
         sys.exit(2)

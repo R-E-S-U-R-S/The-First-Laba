@@ -87,9 +87,9 @@ def opcalculate(numbs: list, operations: list, operation: str) -> tuple[list, li
     return numbs, operations
 
 # main calculating func
-def calc(inptstr: str) -> float :
+def calc(inp_tstr: str, digit_round: int) -> float :
     try:
-        numbs,operations = str_sep(inptstr)
+        numbs,operations = str_sep(inp_tstr)
     except:
         raise CalcErrors("Unknown input symbol")
     for operation in supported_operations:
@@ -98,5 +98,5 @@ def calc(inptstr: str) -> float :
     if numbs[0]==int(numbs[0]):
         return int(numbs[0])
     else:
-        return numbs[0]
+        return round(numbs[0], digit_round)
 
