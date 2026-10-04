@@ -5,6 +5,11 @@ requires-python = ">=3.14"
 dependencies = []
 
 
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+
 Name = "pytest"
 Version = "9.1.1"
 Summary = "pytest: simple powerful testing with Python"
