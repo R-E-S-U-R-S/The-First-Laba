@@ -1,5 +1,21 @@
 [project]
-name = "the-first-laba-conerter-dev"
+name = "the-first-laba"
 version = "0.1.0"
 requires-python = ">=3.14"
 dependencies = []
+
+
+Name = "pytest"
+Version = "9.1.1"
+Summary = "pytest: simple powerful testing with Python"
+Home-page = "https://docs.pytest.org/en/latest/"
+Author = "Brianna Laugher, Bruno Oliveira, Floris Bruynooghe, Freya Bruhin, Holger Krekel, Others (See AUTHORS), Ronny Pfannschmidt"
+Requires = "colorama, exceptiongroup, iniconfig, packaging, pluggy, pygments, tomli"
+
+
+
+#Name = "typer"
+#Version = "0.27.2"
+#Summary = "Typer, build great CLIs. Easy to code. Based on Python type hints."
+#Home-page = "https://github.com/fastapi/typer"
+#Requires = "annotated-doc, colorama, rich, shellingham"

@@ -9,12 +9,20 @@ app = typer.Typer()
 @app.command()
 def convert(convert_units_type:str):
     """Allows to convert length, temperature and mass units. Type mass/length/temperature to use mass or length converter. Requires additional input in next command in 'number, input units, output units' format. Please divide arguments using only space."""
+
     if convert_units_type != "length" and convert_units_type !="mass" and convert_units_type !="temperature":
         error_msg=typer.style("Unexpected convertion type. Please enter mass or length or temperature", fg=typer.colors.RED, bold=True)
         typer.echo(error_msg, err=True)
         sys.exit(2)
 
     inpt_str = input("Input number, input unit, output unit: ").split(" ")
+    try:
+        float(inpt_str[0])
+    except:
+        error_msg = typer.style("First input must be digit", fg=typer.colors.RED, bold=True)
+        typer.echo(error_msg, err=True)
+        sys.exit(2)
+
     if convert_units_type.lower() == "temperature":
         pass
 
