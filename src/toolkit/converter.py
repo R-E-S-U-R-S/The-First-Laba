@@ -1,6 +1,4 @@
-from src.toolkit.errors import unknown_conversion_units
-from src.toolkit.errors import wrong_conversion_unit
-
+from src.toolkit.errors import unknown_conversion_units, wrong_conversion_unit
 
 length_cnostants={
     "meters": 1,

@@ -1,20 +1,24 @@
 import typer
-from src.toolkit.calculator import calc
-from src.toolkit.converter import mass_converter
-from src.toolkit.converter import length_converter
-from src.toolkit.errors import unknown_conversion_type
+import sys
 
+from src.toolkit.calculator import calc
+from src.toolkit.converter import length_converter, mass_converter
+from src.toolkit.errors import unknown_conversion_type
 
 app = typer.Typer()
 
 @app.command()
 def convert(convert_units_type:str):
     """Allows to convert length and mass units. Type mass/length to use mass or length converter. Requires additional input in next command in 'number, input units, output units' format. Please divide arguments using only space."""
+    if convert_units_type != "length" and convert_units_type !="mass":
+        print("You are LOX")
+        sys.exit(1)
+    #     todo не поправить это ^
     inpt_str = input("Input number, input unit, output unit: ").split(" ")
     try:
         if inpt_str[0]<=0:
             print("Impossible mass or length")
-            return
+            sys.exit(2)
     except:
         print("Calculation error try again")
 
@@ -28,9 +32,13 @@ def convert(convert_units_type:str):
 
 @app.command()
 def calculation(input_str:str):
+    # todo -- перед отриц числами, если многа пробелов, то в кавычках
     """Runs simple calculation engine. Please type calculation sequence in brackets."""
-    print(f"Calculation answer: {calc(input_str)}")
-
+    try:
+        print(f"Calculation answer: {calc(input_str)}")
+    except Exception as e:
+        typer.secho(str(e), fg=typer.colors.RED, err=True, bold=True)
+        sys.exit(2)
 
 if __name__ == "__main__":
     app()
