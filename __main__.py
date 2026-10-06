@@ -65,5 +65,6 @@ def calculation(input_str:str, digit_round: int = 5):
         typer.echo(str(e))
         sys.exit(2)
 
+
 if __name__ == "__main__":
     app()

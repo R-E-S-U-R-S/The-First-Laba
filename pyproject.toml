@@ -5,17 +5,17 @@ requires-python = ">=3.14"
 dependencies = []
 
 
-[tool.pytest.ini_options]
-pythonpath = ["src"]
-testpaths = ["tests"]
-
-
-Name = "pytest"
-Version = "9.1.1"
-Summary = "pytest: simple powerful testing with Python"
-Home-page = "https://docs.pytest.org/en/latest/"
-Author = "Brianna Laugher, Bruno Oliveira, Floris Bruynooghe, Freya Bruhin, Holger Krekel, Others (See AUTHORS), Ronny Pfannschmidt"
-Requires = "colorama, exceptiongroup, iniconfig, packaging, pluggy, pygments, tomli"
+#[tool.pytest.ini_options]
+#pythonpath = ["src"]
+#testpaths = ["tests"]
+#
+#
+#Name = "pytest"
+#Version = "9.1.1"
+#Summary = "pytest: simple powerful testing with Python"
+#Home-page = "https://docs.pytest.org/en/latest/"
+#Author = "Brianna Laugher, Bruno Oliveira, Floris Bruynooghe, Freya Bruhin, Holger Krekel, Others (See AUTHORS), Ronny Pfannschmidt"
+#Requires = "colorama, exceptiongroup, iniconfig, packaging, pluggy, pygments, tomli"
 
 
 
