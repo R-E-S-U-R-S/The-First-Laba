@@ -5,12 +5,15 @@ from src.toolkit.constants import  length_cnostants, mass_constants, min_tempera
 
 
 def length_converter(inpt_length:float, inpt_units:str, output_units:str):
+    """Function for length conversion"""
     if inpt_units not in length_cnostants or output_units not in length_cnostants:
         raise ConvErrors("Unknown conversion unit")
     inpt_length*=length_cnostants[inpt_units]
     return inpt_length/length_cnostants[output_units]
 
 def mass_converter(inpt_mass:float, inpt_units:str, output_units:str):
+    """Function for mass conversion"""
+
     try:
         inpt_mass*=mass_constants[inpt_units]
     except:
@@ -20,6 +23,7 @@ def mass_converter(inpt_mass:float, inpt_units:str, output_units:str):
     return inpt_mass/mass_constants[output_units]
 
 def temp_converter(inpt_temp:float, inpt_units:str, output_units:str):
+    """Function for temperature conversion"""
     if inpt_temp <= min_temperature_constants[inpt_units]:
         raise ConvErrors("Impossible low temperature")
 

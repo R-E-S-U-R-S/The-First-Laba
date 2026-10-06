@@ -62,6 +62,7 @@ def str_sep(inpt_str: str, digit_round:int) -> tuple[list, list]:
 
 # calculating brackets
 def brackets_calculation(inpt_str:str, digit_round:int) -> str:
+    """Recursive function to calculate brackets"""
     back_index=inpt_str.index(")")
     front_index=back_index-1
     while inpt_str[front_index]!= "(":
@@ -71,6 +72,7 @@ def brackets_calculation(inpt_str:str, digit_round:int) -> str:
 
 # calculating each operation
 def opcalculate(numbs: list, operations: list, operation: str) -> tuple[list, list]:
+    """Function for calculation every operation"""
     while operations.count(operation)!=0:
         solving_index = operations.index(operation)
         if operations[solving_index]=="**":
@@ -103,6 +105,7 @@ def opcalculate(numbs: list, operations: list, operation: str) -> tuple[list, li
 
 # main calculating func
 def calc(inp_tstr: str, digit_round: int) -> float :
+    """Main function that asembles whole calculation process together """
     if inp_tstr.count("(")!=inp_tstr.count(")"):
         raise CalcErrors("Uneven number of brackets")
     try:
