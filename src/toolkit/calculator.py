@@ -7,6 +7,7 @@ def str_sep(inpt_str: str, digit_round:int) -> tuple[list, list]:
         inpt_str=inpt_str.replace(" ", "")
     while inpt_str.count("-(")>0:
         inpt_str=inpt_str.replace("-(", "-1*(")
+
     numb = ""
     numbs=[]
     operations=[]
@@ -102,6 +103,8 @@ def opcalculate(numbs: list, operations: list, operation: str) -> tuple[list, li
 
 # main calculating func
 def calc(inp_tstr: str, digit_round: int) -> float :
+    if inp_tstr.count("(")!=inp_tstr.count(")"):
+        raise CalcErrors("Uneven number of brackets")
     try:
         numbs,operations = str_sep(inp_tstr, digit_round)
     except:
