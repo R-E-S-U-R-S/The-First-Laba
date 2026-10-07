@@ -7,13 +7,15 @@ def str_sep(inpt_str: str, digit_round:int) -> tuple[list, list]:
         inpt_str=inpt_str.replace(" ", "")
     while inpt_str.count("-(")>0:
         inpt_str=inpt_str.replace("-(", "-1*(")
+    while inpt_str.count("--")>0:
+        inpt_str=inpt_str.replace("--", "")
 
     numb = ""
     numbs=[]
     operations=[]
     l=0
 
-    if ")" in inpt_str:
+    while ")" in inpt_str:
         inpt_str=brackets_calculation(inpt_str, digit_round)
 
     if inpt_str[0] == "-":
@@ -57,10 +59,11 @@ def str_sep(inpt_str: str, digit_round:int) -> tuple[list, list]:
             l+=1
         else:
             raise CalcErrors("Unknown digit/operation")
+    if len(numb)>16:
+        raise CalcErrors("Number too large")
     numbs.append(float(numb))
     return numbs,operations
 
-# calculating brackets
 def brackets_calculation(inpt_str:str, digit_round:int) -> str:
     """Recursive function to calculate brackets"""
     back_index=inpt_str.index(")")
@@ -70,7 +73,6 @@ def brackets_calculation(inpt_str:str, digit_round:int) -> str:
 
     return inpt_str[:front_index] + str(calc(inpt_str[front_index+1:back_index], digit_round)) + inpt_str[back_index+1::]
 
-# calculating each operation
 def opcalculate(numbs: list, operations: list, operation: str) -> tuple[list, list]:
     """Function for calculation every operation"""
     while operations.count(operation)!=0:
@@ -103,7 +105,6 @@ def opcalculate(numbs: list, operations: list, operation: str) -> tuple[list, li
         operations.pop(solving_index)
     return numbs, operations
 
-# main calculating func
 def calc(inp_tstr: str, digit_round: int) -> float :
     """Main function that asembles whole calculation process together """
     if inp_tstr.count("(")!=inp_tstr.count(")"):
@@ -119,3 +120,6 @@ def calc(inp_tstr: str, digit_round: int) -> float :
         return int(numbs[0])
     else:
         return round(numbs[0], digit_round)
+
+
+# print(calc("-(-----(1))" , 5))

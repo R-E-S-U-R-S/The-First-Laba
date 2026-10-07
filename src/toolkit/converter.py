@@ -1,5 +1,3 @@
-from logging import exception
-
 from src.toolkit.errors import  ConvErrors
 from src.toolkit.constants import  length_cnostants, mass_constants, min_temperature_constants
 
